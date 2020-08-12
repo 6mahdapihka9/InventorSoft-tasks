@@ -1,5 +1,8 @@
+const InputArea = document.getElementById("InputArea");
+const OutputArea = document.getElementById("OutputArea");
+
 function sort(){
-    let inputStr = document.getElementById("InputArea").value;
+    let inputStr = InputArea.value;
     //проверяет по реджекс чтобы в строку входили только цифры, запятые и минусы (хотя с ними может быть беда...:()
     if (inputStr.search(/[^-,\d]/g) > -1) {
         //если есть другой символ то сортировка даже не запускается
@@ -17,7 +20,7 @@ function sort(){
         else
             break;
     }
-    document.getElementById("OutputArea").value = insertionSort(arr);
+    OutputArea.value = insertionSort(arr);
 }
 
 function insertionSort(_arr) {
@@ -40,6 +43,6 @@ function insertionSort(_arr) {
 
 function clearAreas() {
     //чистим-чистим ))))
-    document.getElementById("InputArea").value = "";
-    document.getElementById("OutputArea").value = "";
+    InputArea.value = "";
+    OutputArea.value = "";
 }
