@@ -1,17 +1,38 @@
 <!doctype html>
 <html lang="ru">
     <head>
+        <meta charset="UTF-8">
         <title>InventorSoft task 1</title>
         <script src="script.js"></script>
     </head>
     <body style="text-align: center">
         <h1>Insertion Sort</h1>
-        <p>Input array of numbers:</p>
-        <textarea cols="100" rows="10" id="InputArea"></textarea>
-        <br>
-        <button onclick="sort()">Sort</button>
-        <button onclick="clearAreas()">Clear</button>
-        <p>Sorted array:</p>
-        <textarea cols="100" rows="10" id="OutputArea"></textarea>
+        <div>
+            <p>Input array of numbers:</p>
+            <textarea cols="100" rows="10" id="InputArea"></textarea>
+            <br>
+            <button onclick="sort()">Sort</button>
+            <button onclick="clearAreas()">Clear</button>
+            <p>Sorted array:</p>
+            <textarea cols="100" rows="10" id="OutputArea"></textarea>
+        </div>
+        <button onclick="show()">Show info</button>
+        <div id="infoBlock" hidden>
+            <p>
+                Лучшее время: O(n) сравнений, 0 обменов
+            </p>
+            <p>
+                Худшее время: О(n^2) сравнений, обменов
+            </p>
+            <p>
+                Среднее время: О(n^2) сравнений, обменов
+            </p>
+            <p>
+                Затраты памяти: О(n) всего, O(1) вспомогательный
+            </p>
+            <p>
+                (c)pediwikia
+            </p>
+        </div>
     </body>
 </html>

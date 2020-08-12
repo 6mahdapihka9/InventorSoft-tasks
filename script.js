@@ -46,3 +46,7 @@ function clearAreas() {
     InputArea.value = "";
     OutputArea.value = "";
 }
+
+function show(){
+    document.getElementById("infoBlock").hidden = !document.getElementById("infoBlock").hidden;
+}
