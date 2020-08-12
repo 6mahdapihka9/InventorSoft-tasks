@@ -1,69 +1,35 @@
-function readData() {
-    let inputArray = document.getElementById('inputArray').value.replace(new RegExp('\n', 'g'), '').split(',').map(item => parseInt(item))
-    let isValid = true;
-    inputArray.forEach(function(elem){
-        if (isNaN(elem)){
-            document.getElementById('validationError').innerHTML='Array contains non number element.';
-            isValid = false;
-        }
-    });
-    return isValid ? inputArray : undefined;
+function sort(){
+    let inputStr = document.getElementById("InputArea").value;
 
-}
-
-/**
- * clears results
- */
-function clearPreviousResults() {
-    document.getElementById('sortedArray').value='';
-    document.getElementById('validationError').innerHTML='';
-    document.getElementById('numberOfElements').innerText = '';
-}
-
-function processSorting() {
-    clearPreviousResults();
-    var inputArray = readData();
-    if (inputArray) {
-        var sortedArray = mergeSort(inputArray, 0, inputArray.length - 1);
-        //print results
-        document.getElementById('sortedArray').value = sortedArray.join(', ');
-        document.getElementById('numberOfElements').innerHTML = inputArray.length;
+    if (inputStr.search(/[^-,\d]/g) > -1) {
+        document.getElementById("OutputArea").value = "Array contains NaNs!!!";
+        return;
     }
+    let arr = inputStr.split(",");
+    while(true){
+        if(arr.indexOf("") !== -1)
+            arr.splice(arr.indexOf(""), 1);
+        else
+            break;
+    }
+    arr = insertion_Sort(arr);
+    document.getElementById("OutputArea").value = arr;
 }
 
-/**
- * core of the algo, that process sorting using merge sort algo:
- * https://en.wikipedia.org/wiki/Merge_sort
- */
-function mergeSort(arr, left, right) {
-    let result = [];
-    if (left < right) {
-        let middle = Math.floor((left + right) / 2);
-        let leftTemp = mergeSort(arr, left, middle) ;
-        let rightTemp = mergeSort(arr, middle + 1, right);
-        //merge to arrays into one
-
-        let leftIndex = 0;
-        let rightIndex = 0;
-        while (leftIndex < leftTemp.length && rightIndex < rightTemp.length) {
-            if (leftTemp[leftIndex] < rightTemp[rightIndex]) {
-                result.push(leftTemp[leftIndex]);
-                leftIndex++;
-            } else {
-                result.push(rightTemp[rightIndex]);
-                rightIndex++;
-            }
+function insertion_Sort(rr) {
+    for (let i = 1; i < rr.length; i++) {
+        let j = i - 1;
+        let temp = rr[i];
+        while (j >= 0 && +rr[j] > +temp) {
+            rr[j + 1] = rr[j];
+            j--;
         }
-        while (leftIndex < leftTemp.length) {
-            result.push(leftTemp[leftIndex]);
-            leftIndex++;
-        }
-        while (rightIndex < rightTemp.length) {
-            result.push(rightTemp[rightIndex]);
-            rightIndex++;
-        }
-    } else {
-        result.push(arr[left]);
+        rr[j+1] = temp
     }
-    return result;
+    return rr;
+}
+
+function clearAreas() {
+    document.getElementById("InputArea").value = "";
+    document.getElementById("OutputArea").value = "";
 }
