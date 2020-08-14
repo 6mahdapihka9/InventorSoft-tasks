@@ -1,10 +1,10 @@
 const InputArea = document.getElementById("InputArea");
 const OutputArea = document.getElementById("OutputArea");
-
+const InfoBlock = document.getElementById("infoBlock");
 function sort(){
     let inputStr = InputArea.value;
-    //проверяет по реджекс чтобы в строку входили только цифры, запятые и минусы (хотя с ними может быть беда...:()
-    if (inputStr.search(/[^-,\d]/g) > -1) {
+    //проверяет по реджекс чтобы в строку входили только цифры, запятые, точки и минусы (хотя с ними может быть беда...:()
+    if (inputStr.search(/[^-,\d\.]/g) > -1) {
         //если есть другой символ то сортировка даже не запускается
         //и в текстовую строку выводит сообщение об ошибке
         document.getElementById("OutputArea").value = "Array contains NaNs!!!";
@@ -12,14 +12,14 @@ function sort(){
     }
     //разбитие строки по ","
     let arr = inputStr.split(",");
-    //цикл для удаление пустых елементов
-    //можно было придумать что-то получше...
-    while(true){
-        if(arr.indexOf("") !== -1)
-            arr.splice(arr.indexOf(""), 1);
-        else
-            break;
-    }
+    //цикл для вылавливания пустых елементов и тех что не подходят
+    //можно было использовать простой способ из премера
+    //парсить в инт и отлавливать НаН, но так сделаэт все, а я хотел козырнуться regex'ами )))
+    for (let k in arr)
+        if (!arr[k].match(/-?\d+|-?\d+\.\d+/g)) {
+            document.getElementById("OutputArea").value = "Array contains NaNs!!!";
+            return;
+        }
     OutputArea.value = insertionSort(arr);
 }
 
@@ -48,5 +48,5 @@ function clearAreas() {
 }
 
 function show(){
-    document.getElementById("infoBlock").hidden = !document.getElementById("infoBlock").hidden;
+    InfoBlock.hidden = !InfoBlock.hidden;
 }
