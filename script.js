@@ -1,6 +1,7 @@
 const InputArea = document.getElementById("InputArea");
 const OutputArea = document.getElementById("OutputArea");
 const InfoBlock = document.getElementById("infoBlock");
+
 function sort(){
     let inputStr = InputArea.value;
     //проверяет по реджекс чтобы в строку входили только цифры, запятые, точки и минусы (хотя с ними может быть беда...:()
@@ -12,9 +13,10 @@ function sort(){
     }
     //разбитие строки по ","
     let arr = inputStr.split(",");
-    //цикл для вылавливания пустых елементов и тех что не подходят
-    //можно было использовать простой способ из премера
-    //парсить в инт и отлавливать НаН, но так сделаэт все, а я хотел козырнуться regex'ами )))
+    //цикл для вылавливания пустых елементов и тех что не подходят.
+    //можно было использовать простой способ из премера:
+    //парсить в инт и отлавливать НаН, но так сделают все,
+    //а я хотел козырнуться regex'ами )))
     for (let k in arr)
         if (!arr[k].match(/-?\d+|-?\d+\.\d+/g)) {
             document.getElementById("OutputArea").value = "Array contains NaNs!!!";
