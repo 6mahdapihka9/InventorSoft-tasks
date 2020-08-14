@@ -8,7 +8,7 @@ function sort(){
     if (inputStr.search(/[^-,\d\.]/g) > -1) {
         //если есть другой символ то сортировка даже не запускается
         //и в текстовую строку выводит сообщение об ошибке
-        document.getElementById("OutputArea").value = "Array contains NaNs!!!";
+        OutputArea.value = "Array contains NaNs!!!";
         return;
     }
     //разбитие строки по ","
@@ -19,7 +19,7 @@ function sort(){
     //а я хотел козырнуться regex'ами )))
     for (let k in arr)
         if (!arr[k].match(/-?\d+|-?\d+\.\d+/g)) {
-            document.getElementById("OutputArea").value = "Array contains NaNs!!!";
+            OutputArea.value = "Array contains NaNs!!!";
             return;
         }
     OutputArea.value = insertionSort(arr);
@@ -43,12 +43,12 @@ function insertionSort(_arr) {
     return _arr;
 }
 
-function clearAreas() {
+function clearTextAreas() {
     //чистим-чистим ))))
     InputArea.value = "";
     OutputArea.value = "";
 }
 
-function show(){
+function showInfo(){
     InfoBlock.hidden = !InfoBlock.hidden;
 }
